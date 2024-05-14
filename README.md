@@ -1,1 +1,1 @@
-# hamza
+Developed and implemented an AI calling agent for client, resulting in significant time saving of 120 hours per week. The automation streamlined calling processes, enhancing efficiency and productivity for the client's operations, in 30% less time then planned
