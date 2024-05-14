@@ -1,4 +1,4 @@
-Developed and implemented an AI calling agent for client, resulting in significant time saving of 120 hours per week. The automation streamlined calling processes, enhancing efficiency and productivity for the client's operations, in 30% less time then planned
+Developed and implemented an AI calling agent for client, resulting in significant time saving of 120 hours per week. The automation streamlined calling processes, enhancing efficiency and productivity for the client's operations, in 30% less time then planned \n
 Transcription services, including:
 
           AssemblyAI
@@ -31,4 +31,4 @@ Synthesis services, including:
 
 
 
-Demonstrated SVP (Solutions Architecture & Products) capabilities by integrating with SageMaker components on Kubeflow pipelines, resulting in 16+ live data exchanges. 
+Demonstrated SVP (Solutions Architecture & Products) capabilities by integrating with SageMaker components on Kubeflow pipelines, resulting in 16+ live data exchanges.  \n
