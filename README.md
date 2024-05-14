@@ -17,7 +17,8 @@ LLMs, including:
           GPT-4
           Anthropic
           GPT4All
-Synthesis services, including:          
+Synthesis services, including:         
+
           Rime.ai
           Microsoft Azure
           Google Cloud
