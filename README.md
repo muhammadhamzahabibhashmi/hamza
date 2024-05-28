@@ -57,36 +57,6 @@ Voice calling agents built using AI transformers, Node.js, Python, and Next.js.
 
 ---
 
-### Email Sales Automation for Business Process Automation
-Automated sales processes using Microsoft cloud technologies.
-
-- **Technologies:** Microsoft Cloud, Power Automate, Node.js, C#
-- **Key Features:**
-  - Developed automation workflows using Power Automate and Copilot.
-  - Built a user-friendly dashboard for monitoring and managing sales activities.
-  - Integrated Go High Level, Calendly, and Cal.com to streamline scheduling and follow-ups.
-  - Enhanced efficiency and productivity through business process automation.
-  - Achieved a 30% increase in sales efficiency and reduced manual intervention.
-
-![Email Sales Automation](/public/process_aitomation.avif) <!-- Replace with actual image URL -->
-
----
-
-### High Fidelity 2D Image to 3D Model Creation
-Transforms a single image into detailed 3D models.
-
-- **Technologies:** Python, Generative AI, Ruby on Rails
-- **Key Features:**
-  - Developed a high-fidelity 3D creation technology for realistic digital content.
-  - Achieved unprecedented realism and accuracy in 3D models from 2D images.
-  - Integrated generative AI techniques to enhance model quality and detail.
-  - Implemented using Python for backend processing and Ruby on Rails for web interface.
-  - Enabled content creators to produce high-quality 3D models efficiently.
-
-![2D to 3D Model Creation](/public/2dto3d.webp) <!-- Replace with actual image URL -->
-
----
-
 ### AI Disease Detection Using Eye Scans
 AI model to detect infections and stomach-related diseases from eye scans.
 
@@ -134,6 +104,38 @@ Virtual try-on application using generative AI and computer vision.
   - Increased customer satisfaction and reduced return rates for e-commerce platforms.
 
 ![Virtual Try-ons](/public/viton.png) <!-- Replace with actual image URL -->
+
+---
+
+
+
+### Email Sales Automation for Business Process Automation
+Automated sales processes using Microsoft cloud technologies.
+
+- **Technologies:** Microsoft Cloud, Power Automate, Node.js, C#
+- **Key Features:**
+  - Developed automation workflows using Power Automate and Copilot.
+  - Built a user-friendly dashboard for monitoring and managing sales activities.
+  - Integrated Go High Level, Calendly, and Cal.com to streamline scheduling and follow-ups.
+  - Enhanced efficiency and productivity through business process automation.
+  - Achieved a 30% increase in sales efficiency and reduced manual intervention.
+
+![Email Sales Automation](/public/process_aitomation.avif) <!-- Replace with actual image URL -->
+
+---
+
+### High Fidelity 2D Image to 3D Model Creation
+Transforms a single image into detailed 3D models.
+
+- **Technologies:** Python, Generative AI, Ruby on Rails
+- **Key Features:**
+  - Developed a high-fidelity 3D creation technology for realistic digital content.
+  - Achieved unprecedented realism and accuracy in 3D models from 2D images.
+  - Integrated generative AI techniques to enhance model quality and detail.
+  - Implemented using Python for backend processing and Ruby on Rails for web interface.
+  - Enabled content creators to produce high-quality 3D models efficiently.
+
+![2D to 3D Model Creation](/public/2dto3d.webp) <!-- Replace with actual image URL -->
 
 ---
 
