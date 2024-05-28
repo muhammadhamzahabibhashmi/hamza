@@ -57,21 +57,6 @@ Voice calling agents built using AI transformers, Node.js, Python, and Next.js.
 
 ---
 
-### [Shredded Apes](https://www.shreddedapes.io/)
-A complete project involving staking, raffle, auction, and eCommerce ecosystem using Web3 blockchain.
-
-- **Technologies:** Node.js, Rust, React.js, Express.js
-- **Key Features:**
-  - Developed a comprehensive staking, raffle, and auction platform.
-  - Created an eCommerce ecosystem leveraging Web3 blockchain technologies.
-  - Built a robust Rust backend to handle complex transactions and ensure security.
-  - Delivered a seamless user experience with React.js front-end.
-  - Successfully increased user engagement and transaction volume through innovative features.
-
-![Shredded Apes](public/shreddedapes.png) <!-- Replace with actual image URL -->
-
----
-
 ### Email Sales Automation for Business Process Automation
 Automated sales processes using Microsoft cloud technologies.
 
@@ -177,6 +162,20 @@ Built a comprehensive sales funnel from prospecting and lead generation to autom
   - Utilized data analytics to refine targeting and improve conversion rates.
   - Increased lead conversion rates and streamlined the sales process.
 
+---
+
+### [Shredded Apes](https://www.shreddedapes.io/)
+A complete project involving staking, raffle, auction, and eCommerce ecosystem using Web3 blockchain.
+
+- **Technologies:** Node.js, Rust, React.js, Express.js
+- **Key Features:**
+  - Developed a comprehensive staking, raffle, and auction platform.
+  - Created an eCommerce ecosystem leveraging Web3 blockchain technologies.
+  - Built a robust Rust backend to handle complex transactions and ensure security.
+  - Delivered a seamless user experience with React.js front-end.
+  - Successfully increased user engagement and transaction volume through innovative features.
+
+![Shredded Apes](public/shreddedapes.png) <!-- Replace with actual image URL -->
 
 ---
 
