@@ -1,4 +1,4 @@
-# Haziq Ajam Malik
+# Hamza Habib Hashmi
 
 Welcome to my GitHub profile! I have a diverse skill set in various cutting-edge technologies. Below is a showcase of some of the projects I've worked on.
 
@@ -7,7 +7,7 @@ Welcome to my GitHub profile! I have a diverse skill set in various cutting-edge
 ## About Me
 
 👨‍💼 **Profession:** Solutions Architect  
-🔧 **Skills:** Python, Node.js, Next.js, Express, Rust, React.js, Microsoft Cloud, Power Automate, C#, Ruby on Rails, Java, TFLite, C++, Docker, Kubernetes, AWS Lambda, Generative AI, Computer Vision, Image Processing, Electron.js
+🔧 **Skills:** Python, Flask, Rust, AWS, Microsoft Cloud, C#, Java, TFLite, C++, Docker, Kubernetes, AWS Lambda, Generative AI, Computer Vision, Image Processing, Electron.js
 
 I specialize in:
 - Developing scalable, secure, and efficient solutions tailored to client needs.
