@@ -183,5 +183,5 @@ A complete project involving staking, raffle, auction, and eCommerce ecosystem u
 
 ## Connect with Me
 
-[![GitHub Followers](https://img.shields.io/github/followers/username?label=Follow&style=social)](https://github.com/haziqajam) <!-- Replace 'username' with your GitHub username -->
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/haziq-ajam-malik-99aa36162/) <!-- Replace with your LinkedIn profile URL -->
+[![GitHub Followers](https://img.shields.io/github/followers/username?label=Follow&style=social)](https://github.com/muhammadhamzahabibhashmi/) <!-- Replace 'username' with your GitHub username -->
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/muhammad-hamza5) <!-- Replace with your LinkedIn profile URL -->
