@@ -40,13 +40,15 @@ I specialize in:
 
 ### Loudhouse Marketing
 
-Loudhouse is a marketing agency in Islamabad. They wanted a site that behaved like an agency reel rather than a brochure, so the build leans hard on motion: a Times Square hero, a scroll-scrubbed film sequence on the About page, and an exploded 3D speaker on Services and Work that comes apart as you scroll. It also does real work — leads land in MongoDB and trigger an email, and two Groq-backed endpoints run the site chatbot and a short discovery quiz that recommends a service stack.
+Loudhouse is an agency in Islamabad that runs a deliberately small book of clients. The brief was a site people would watch rather than read, so most of the build went into motion: the landing scene puts the brand up on Times Square billboards, the About route plays as a film you scrub with the scrollbar, and a speaker model pulls itself apart across Services and Work.
 
-The About page was the interesting problem. Scrubbing a `<video>` off scroll position isn't frame-accurate across browsers, so the 4K master gets decoded into WebP stills at build time and painted to a canvas instead. That worked on desktop and killed mobile — holding 181 decoded bitmaps costs about 1.5 GB on a phone. Halving the frame stride and decoding straight to the painted size brought it down to roughly 139 MB and the page back to a usable frame rate.
+Behind all that it's an ordinary MERN app. Contact submissions get validated, written to MongoDB and mailed on. Two further routes sit on top of Groq, one running the site assistant and one walking a visitor through four questions before suggesting what to buy.
+
+Getting the About sequence usable on phones took the longest. Painting frames to a canvas instead of seeking a video solved the stutter on desktop but made things worse on mobile, because a decoded frame sits in memory uncompressed. At 1080×1920 the full set came to around 1.5 GB. Dropping to every second frame and decoding at the size the canvas actually paints brought it down to roughly 139 MB.
 
 **Tech Stack:** React 18, Vite, Three.js, React Three Fiber, GSAP ScrollTrigger, Framer Motion, Lenis, Express, MongoDB/Mongoose, Nodemailer, Groq API, Vercel
 
-**Key Work:** the whole front end and its motion system, the procedural Three.js speaker, the scroll-film pipeline and its mobile memory fix, the Express API and Vercel serverless functions for leads and chat, per-route SEO with canonicals and JSON-LD, and a set of Puppeteer scripts that check scroll smoothness, reduced-motion behaviour and layout overflow across viewports.
+**Key Work:** front end and the whole motion layer, the speaker built in code rather than modelled, the frame pipeline and its memory fix, Express routes plus the serverless versions for leads and chat, per-route metadata and structured data, and a folder of Puppeteer scripts for checking smoothness, reduced motion and overflow.
 
 **Repository:** private · [Full write-up →](projects/loudhouse.md)
 
@@ -56,13 +58,13 @@ The About page was the interesting problem. Scrubbing a `<video>` off scroll pos
 
 ### Formynex
 
-Formynex sells animated website templates. The pitch is that you don't buy from a screenshot — every one of the 44 templates in the catalogue is a live demo you can open and scroll before you decide. Visitors shortlist what they want into a selection drawer and hand it to an agent, since the templates are sold by conversation rather than checkout.
+A storefront for animated website templates. Instead of selling from static previews, all 44 entries in the catalogue link to something you can actually scroll through yourself, and there's no card payment at the end: buyers collect what they like in a drawer, then an agent prices the licence with them.
 
-The site started as a single-page SPA that served one empty `<div>` for every URL with a hard-coded canonical pointing at the wrong host — nine template pages all telling Google they were the same page. I added an SSR build step and a prerenderer, so every route ships as real HTML with its own metadata, and both the build script and the client import the same SEO module so the two can't drift apart. Preview media only mounts as it approaches the viewport, videos pause once they scroll away, and `prefers-reduced-motion` gets a static poster instead.
+It came to me as a plain Vite SPA serving an empty root div on every URL, with the one canonical tag in `index.html` pointing at a completely different domain. Every template page was announcing itself as a copy of something else. I added an SSR pass and a prerender step so each route ships finished HTML, and moved every title, description and canonical into a single module that the build script and the browser both read from. Preview media stays unmounted until its card gets close to the viewport, and anything off screen stops playing.
 
-**Tech Stack:** React 18, TypeScript, Vite, Tailwind CSS, Framer Motion, React Router, Vercel
+**Tech Stack:** React 18, TypeScript, Vite, Tailwind, Framer Motion, React Router, Vercel
 
-**Key Work:** the catalogue and filtering UI, the selection drawer with localStorage persistence, the SSR prerender pipeline, sitemap and robots generation, JSON-LD, the lazy animated-preview component, a responsive audit script that shoots every route at 320/768/1440, and a contrast checker.
+**Key Work:** catalogue and filtering, the selection drawer with its localStorage layer, the prerender pipeline, sitemap and robots output, structured data, the lazy preview component, a script that shoots every route at three widths to catch overflow, and a contrast check over the palette.
 
 **Live Demo:** https://formynex.site · **Repository:** private · [Full write-up →](projects/formynex.md)
 
@@ -72,13 +74,13 @@ The site started as a single-page SPA that served one empty `<div>` for every UR
 
 ### Techno Zone
 
-Techno Zone is a Rawalpindi company that has been installing CCTV, access control, fire alarms, telephone exchanges and solar systems since 2009. They needed to show up when someone searches for those services in Islamabad or Rawalpindi, which meant a page per service rather than one list.
+Techno Zone have been fitting CCTV, access control, fire alarms, exchanges and solar around Rawalpindi since 2009. Their problem was visibility. People search for one service in one city, and a page listing eleven of them won't rank for any. So each service got a page of its own, written around the phrase somebody would actually type.
 
-Rather than pull in a framework for a site that is mostly content, I wrote a small Node generator with no dependencies. Service and support pages are rendered from data files into static HTML that gets committed to the repo, along with the sitemap — so deploys stay a plain file upload with no build step in the pipeline. Every phone number, address and service name comes from one config object, and nothing on the site is a claim the owner didn't give me.
+For a site that's almost entirely copy, React would have been overhead. I wrote a small generator instead, no dependencies. Page content lives in data files, `node build/generate.js` turns it into HTML, and the output gets committed to the repo, which keeps deploys down to a file copy. Phone numbers, address and service names all resolve from one object, so changing the landline is a one-line edit rather than twenty.
 
-**Tech Stack:** Node.js (static generator), HTML, CSS, vanilla JavaScript, Vercel
+**Tech Stack:** Node.js (custom generator), HTML, CSS, vanilla JavaScript, Vercel
 
-**Key Work:** the generator and its content model, the design and front end, twelve service landing pages, LocalBusiness and Service JSON-LD, sitemap and robots output, WhatsApp and call-tracking hooks, and the image pipeline for the product and equipment shots.
+**Key Work:** the generator and its content model, design and front end, twelve service pages, LocalBusiness and Service markup, sitemap and robots, WhatsApp and call hooks, and processing the client's equipment photography for the web.
 
 **Live Demo:** https://www.technozoneisb.online · **Repository:** private · [Full write-up →](projects/technozone.md)
 
@@ -88,13 +90,13 @@ Rather than pull in a framework for a site that is mostly content, I wrote a sma
 
 ### XLIME GEAR
 
-A 13-screen prototype for a custom football kit brand — storefront, product detail, a step-by-step jersey builder, cart and checkout, account, team bulk ordering, and an admin side for reviewing orders. The builder is the centre of it: pick a kit, set primary and trim colours, upload a crest, then send the whole thing off as a quote rather than a card payment, because team orders get priced per job.
+Thirteen screens for a football kit brand that lets teams design their own strip: shop, product pages, the kit builder, cart and checkout, accounts, bulk ordering for clubs, and an admin side for handling what comes in. Everything funnels into the builder, where you pick a base kit, set primary and trim colours, upload a crest and finish with a quote request instead of a payment, since club orders get priced job by job.
 
-The deliverable was the awkward part. The client needed to review all thirteen screens without a dev environment, so I built a single self-contained HTML file that embeds every original page byte-for-byte plus its screenshot, with a branded landing page and a device-framed live viewer in front of them. A verification step decodes each embedded page back out and byte-compares it to the source, so nothing is quietly lost in the packaging.
+Packaging it turned into its own piece of work. The client had no way to run a dev server, so all thirteen pages went into a single HTML file, each one embedded whole next to its screenshot, behind a landing page and a viewer that runs them live inside a device frame. Before calling it finished I had the script decode every embedded page back out and byte-compare it against the source.
 
-**Tech Stack:** HTML, Tailwind CSS, design tokens, Node.js build script
+**Tech Stack:** HTML, Tailwind, semantic design tokens, Node.js packaging script
 
-**Key Work:** the screen designs and the dark motion-led design system behind them, the jersey builder flow, the admin views, and the single-file packaging and verification script.
+**Key Work:** the screen designs and the dark, motion-led system underneath them, the builder flow, the admin views, and the packaging and verification script.
 
 **Status:** design prototype, not deployed · **Repository:** private · [Full write-up →](projects/xlimegear.md)
 

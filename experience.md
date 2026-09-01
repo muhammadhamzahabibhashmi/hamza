@@ -1,77 +1,71 @@
 # Background
 
-I build web applications end to end — the interface, the API behind it, and whatever it takes to get the thing live and found.
+I build web applications end to end. The interface, the API behind it, and whatever it takes to get the thing live and findable.
 
-My route into it was through machine learning. I spent several years on computer vision, speech and model deployment: getting models off a notebook and onto edge devices, into containers, behind serverless endpoints, and keeping the cost of running them sane. That work is why I'm comfortable with the infrastructure side of a product and why AI features in the apps I build now tend to be wired properly rather than bolted on.
+I came into this through machine learning rather than through web work. Several years of computer vision, speech and model deployment: getting models off a notebook and onto edge devices, into containers, behind serverless endpoints, and keeping what they cost to run within reason. That's why I'm comfortable with the infrastructure end of a product, and it's why the AI features I put into web apps now tend to be wired in properly instead of bolted on the side.
 
-These days most of my work is client products and sites: React and Next.js front ends, Node and Python back ends, and the performance and SEO work that decides whether anyone sees them.
+These days the work is mostly client products and sites. React and Next.js on the front, Node and Python behind, and the performance and search work that decides whether anyone finds any of it.
 
-Based in Islamabad, Pakistan.
-
----
+Based in Islamabad.
 
 ## Front end
 
-React and Next.js are what I reach for, in TypeScript where the project allows it. I'm comfortable in both the App Router and older Next setups, and with plain Vite when a framework would be overhead.
+React and Next.js are the default, TypeScript wherever the project allows it. App Router and the older Next setups both, and plain Vite when a framework would only be in the way.
 
-Motion is a real part of my work rather than a garnish. GSAP with ScrollTrigger for scroll-driven sequences, Framer Motion for component-level animation, Lenis for smooth scrolling. I've built scroll-scrubbed frame films, pinned scenes with cross-fading content, and procedural Three.js scenes with React Three Fiber — including an exploded 3D speaker built entirely in code so there's no model to download.
+Motion is a real part of what I do rather than decoration on top. GSAP with ScrollTrigger for anything driven by scroll position, Framer Motion at the component level, Lenis for smoothing. I've built scroll-scrubbed frame sequences, pinned scenes with content fading over them, and procedural Three.js work through React Three Fiber, including a speaker assembled entirely in code so there's no model file to download.
 
-The part that takes the time isn't making motion work, it's making it survive contact with a phone. Decoded bitmaps and full-resolution frames will eat a gigabyte of memory on a handset without complaining, and the fix is usually stride, decode size and knowing what to drop. I check reduced-motion behaviour on everything — a scroll film that can't be turned off is an accessibility problem, not a feature.
+The time doesn't go into making motion work. It goes into making it survive a phone. Decoded bitmaps and full-resolution frames will quietly consume a gigabyte on a handset, and getting out of that is a matter of stride, decode size, and being willing to drop things. I test reduced-motion behaviour on everything I build, because a sequence you can't turn off is an accessibility problem wearing a nice coat.
 
-Layout work: CSS Modules or Tailwind depending on the project, responsive from 320 up, and automated checks that shoot every route at several viewports and flag horizontal overflow rather than trusting a resize by hand.
+Layout: CSS Modules or Tailwind depending on the project, responsive from 320 upward, and automated shots at several widths that flag horizontal overflow rather than my dragging a window around and hoping.
 
 ## Back end
 
-Express and Node for most APIs, Python and Flask where the work is model-adjacent. Mongoose with MongoDB, Prisma and Drizzle with PostgreSQL, Supabase where auth and storage come along with it.
+Express and Node for most APIs, Python and Flask when the work sits close to a model. Mongoose with MongoDB, Prisma and Drizzle with Postgres, Supabase where auth and storage coming along for the ride is worth it.
 
-Auth with JWT and session cookies, password hashing, input validation and sanitisation at the boundary. AI integrations run server-side so keys stay off the client, with history capped and truncated before anything is forwarded, and structured JSON responses when the client needs to render something specific rather than a paragraph.
+JWT and session cookies, hashing, validation and sanitisation at the boundary. Anything touching an LLM runs server side so keys never reach a browser, with history trimmed and capped before it's forwarded, and structured JSON coming back when the client needs to render something specific rather than a paragraph of text.
 
-Third-party integration work: Groq, OpenAI-compatible APIs, Nodemailer, web-push, Power Automate, Go High Level, Calendly and Cal.com.
+Integration work over the years: Groq, OpenAI-compatible APIs, Nodemailer, web-push, Power Automate, Go High Level, Calendly, Cal.com.
 
 ## Deployment
 
-Vercel for most web projects — serverless functions, rewrites and redirects, per-path cache and security headers, environment configuration per stage. Docker and Docker Compose where a project has a Python worker or GPU path alongside the web app. Kubernetes and Kubeflow, and AWS Lambda for burst inference, from the ML infrastructure work.
+Vercel for most web projects. Serverless functions, rewrites and redirects, cache and security headers per path, environment config per stage. Docker and Compose where there's a Python worker or a GPU path alongside the web app. Kubernetes and Kubeflow, plus Lambda for burst inference, from the infrastructure years.
 
-I generally prefer a deploy pipeline with as few moving parts as the project allows. One recent site is a static generator committing plain HTML, so the deploy is a file upload with no build step to break.
+Given the choice I'll take the pipeline with the fewest moving parts the project can stand. One site I finished recently is a generator committing plain HTML, so its deploy is a file copy with nothing in it that can fail.
 
-## SEO and performance
+## Search and performance
 
-This is a bigger part of my work than it usually is for a developer, mostly because I keep inheriting sites where it was never done.
+A bigger slice of my work than it usually is for a developer, largely because I keep being handed sites where nobody did it.
 
-Technical SEO: prerendering or SSR so routes serve real HTML rather than an empty div, per-route titles, descriptions and canonicals derived from one source that both the build and the client import so they can't drift, JSON-LD with entities referenced by `@id` rather than repeated, generated sitemaps and robots, real 404 documents, and keyword-to-URL mapping so pages don't compete with each other.
+Prerendering or SSR so routes return real HTML instead of an empty div. Titles, descriptions and canonicals per route, derived from one source that the build and the client both read so they can't disagree. Structured data with entities referenced rather than repeated. Generated sitemaps and robots, real 404 documents, and a keyword map so two pages don't end up fighting each other for the same query.
 
-I don't put claims in schema that the business can't back — no invented ratings, no review markup for reviews that don't exist, no social profiles that aren't there.
+I won't put a claim in structured data that the business can't stand behind. No invented ratings, no review markup where there are no reviews, no social profiles that don't exist.
 
-Performance: lazy-mounting heavy media on intersection, pausing off-screen video, reserving aspect ratio so nothing shifts, immutable caching on content-addressed assets, and keeping third-party JavaScript off pages with a Core Web Vitals budget — including gating analytics behind a real measurement ID so the site doesn't ship an inert tracking script.
+On performance: mounting heavy media on intersection, pausing video that's left the screen, reserving aspect ratio so nothing jumps, immutable caching on assets whose names never change, and keeping third-party JavaScript off pages with a budget to hold. That last one includes gating analytics behind a real measurement ID, so a site doesn't end up shipping a tracking script that reports to nobody.
 
 ## Machine learning
 
-Computer vision, image processing and generative imaging: segmentation, virtual try-on, single-image 3D reconstruction, detection models. Speech: STT and TTS pipelines tuned for real-time use. Model work with TFLite, quantisation and C++ preprocessing to hit frame-rate targets on edge hardware, and LoRA fine-tuning for generative models.
+Vision and image work: segmentation, virtual try-on, single-image 3D reconstruction, detection models. Speech: STT and TTS pipelines tuned for use in real time rather than in a demo. Model work with TFLite, quantisation and C++ preprocessing to hit frame-rate targets on hardware that isn't a workstation. LoRA fine-tuning on the generative side.
 
-On the serving side: RAG retrieval, LLM function calling, and getting inference cost down to something a business can actually run.
+On serving: RAG retrieval, function calling, and getting inference costs down to a number a business can actually live with.
 
 ## Languages and tools
 
 TypeScript, JavaScript, Python, C#, Java, C++, Rust, SQL
 
-React, Next.js, Vite, Three.js, GSAP, Framer Motion, Tailwind, Node.js, Express, Flask, Prisma, Drizzle, Mongoose
+React, Next.js, Vite, Three.js, GSAP, Framer Motion, Tailwind, Node, Express, Flask, Prisma, Drizzle, Mongoose
 
-MongoDB, PostgreSQL, Neon, Supabase
+MongoDB, Postgres, Neon, Supabase
 
 Docker, Kubernetes, AWS, Vercel, Microsoft Cloud
 
 Puppeteer, Playwright, Vitest, FFmpeg, Sharp
 
----
-
 ## How I work
 
-I read the existing code before changing it. Most of the projects above are things I inherited part-built, and the useful move is usually finding the one wrong assumption underneath — a canonical pointing at the wrong host, frames held at full resolution — rather than rewriting from scratch.
+I read the code before I change it. Most of what's on this profile arrived half-built, and the useful move is nearly always finding the one wrong assumption sitting underneath, a canonical aimed at somebody else's domain, frames held at a resolution nothing paints at, rather than starting again from an empty folder.
 
-I check work by running it. The motion projects have Puppeteer scripts that drive the real site and report frame timing, overflow and console errors, because motion is exactly the kind of thing that looks fine on the machine it was built on.
+I check things by running them. The motion projects have Puppeteer scripts that drive the real site and report frame timing, overflow and console errors, because motion is exactly the kind of work that looks fine on the machine it was built on and nowhere else.
 
-I don't put numbers on a site that the owner can't stand behind.
+And I don't put numbers on a client's site that the client can't stand behind.
 
----
-
-[Back to portfolio](README.md) · [LinkedIn](https://www.linkedin.com/in/muhammad-hamza5)
+[Back to the portfolio](README.md) · [LinkedIn](https://www.linkedin.com/in/muhammad-hamza5)

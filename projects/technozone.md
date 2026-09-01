@@ -1,48 +1,43 @@
 # Techno Zone
 
-**Live:** https://www.technozoneisb.online
+**Live Demo:** https://www.technozoneisb.online
 **Repository:** private
-**Role:** design, build, content structure, technical SEO, deployment
+**Role:** design, build, content structure, technical search work, deploy.
 
 ![Techno Zone home page](../assets/screenshots/technozone-home.png)
 
-## What it is
+## The business
 
-Techno Zone has been installing security and communication systems out of Rawalpindi since 2009 — CCTV, access control, fire alarms, biometric attendance, telephone exchanges, video intercom, conference systems, gate automation, solar, and general order supply for corporate, industrial and government clients.
+Techno Zone have been putting in security and communication systems out of Rawalpindi since 2009. CCTV, access control, fire alarms, biometric attendance, telephone exchanges, video intercom, conference rooms, gate automation, solar, and general procurement, mostly for corporate, industrial and government clients.
 
-Their problem was search. Someone looking for CCTV installation in Islamabad types exactly that, and a single services page listing a dozen things doesn't rank for any of them. So the site is built the other way round: a landing page per service, each one written about that service in that city, with the site's own structure pointing at them.
+Their problem was search. Somebody who needs cameras for a warehouse in Islamabad types roughly that, and one page listing a dozen services satisfies nobody looking for any of them. So the site got turned inside out: a page per service, each written about that service in that city, with the navigation and internal links pointing at them properly.
 
-## Why a generator instead of a framework
+## Why a generator and not a framework
 
-The site is mostly content. Twelve service pages plus about, projects, products, areas served, contact and the legal pages — all sharing one header, footer, WhatsApp bar and schema block. Hand-maintaining that means the phone number is wrong on page nine the first time it changes.
+Almost all of it is copy. Twelve service pages plus about, projects, products, areas served, contact and the legal pages, every one of them sharing a header, a footer, a WhatsApp bar and a block of structured data. Maintain that by hand and the phone number will be wrong on page nine within a month.
 
-But it also didn't need React. Pulling in a framework to render static text would have added a build step to the deploy pipeline and a JavaScript bundle to a site whose visitors are often on mobile data.
+But it didn't need React either. Bringing in a framework to render static text buys you a build step that can fail and a bundle to download, on a site whose visitors are frequently on mobile data in a car park.
 
-So it's a small Node generator with no dependencies. Pages are described as data in `build/content-services.js` and `build/content-pages.js`, and `node build/generate.js` renders them into static HTML that gets committed to the repo along with the regenerated sitemap. Hosting doesn't change — Vercel keeps serving files, and there's no build step in the deploy at all.
+So there's a small generator with no dependencies at all. Content sits as data in `build/content-services.js` and `build/content-pages.js`, `node build/generate.js` renders it, and the resulting HTML gets committed alongside a regenerated sitemap. Hosting doesn't change and the deploy pipeline has nothing in it to break.
 
-A few pages are deliberately hand-maintained rather than generated, because they diverged enough from the template to be worth it. Those are listed explicitly in the generator so the sitemap still covers them.
+A handful of pages drifted far enough from the template that generating them stopped being worthwhile, so those stay hand-written. They're named explicitly in the generator, which is how they still make it into the sitemap.
 
-## One source of truth
+## Everything from one object
 
-Everything a crawler or a customer reads about the business comes from a single config object: the canonical origin, brand and alternate names, founding date, landline, WhatsApp number, email, street address, city, region, areas served, OG image and logo.
+The canonical origin, the brand and the names people also search for, the year they started, the landline, the WhatsApp number, the email, the street, the city, the region, the areas covered, the social image and the logo. All of it, once, in one place.
 
-Every value in it is either verified from existing site content or was supplied by the owner. Nothing is invented — no made-up years of experience, no invented project counts, no review schema for reviews that don't exist. The WhatsApp number is on the site because the business gave it; there's no mobile line listed because there isn't one.
+Every one of those values either came out of the existing site or came from the owner directly. There's no invented decade of experience, no round number of installations, no review markup for reviews nobody left. The WhatsApp number appears because the business gave it to me. There's no mobile line listed because there isn't one.
 
-## Technical SEO
+## The search work
 
-- one indexable landing page per service, each with its own title, description, canonical and OG image
-- LocalBusiness schema carrying the real address, hours and service area, with Service nodes per page
-- generated `sitemap.xml` covering both generated and hand-maintained routes
-- `robots.txt` with an absolute sitemap URL, plus an `llms.txt` describing the business for language models
-- an areas-served page for the surrounding towns, and internal links from every service page back into the set
-- a real 404 document rather than a redirect to home
+Twelve indexable service pages, each with its own title, description, canonical and social image. LocalBusiness markup carrying the real address, hours and coverage area, with Service nodes hanging off the individual pages. A generated sitemap covering the hand-written routes as well as the rendered ones. Robots with an absolute sitemap reference, and an `llms.txt` describing the business for models that go looking for one. A page for the surrounding towns, links running between the services so none of them sits on its own, and a proper 404 document rather than a bounce to the homepage.
 
-There's a keyword map and an audit trail in the repo tracking which page owns which query, so two pages never end up competing for the same term.
+There's a keyword map in the repo recording which page owns which query. Mostly that exists so two pages never end up quietly competing for the same phrase, which is the usual way this sort of site goes wrong.
 
-## Front end
+## The front end
 
-Dark theme, hand-written CSS, no framework. A product rail that scrolls continuously, a services slider, a sticky WhatsApp button and a top bar carrying the number so calling is always one tap away. Images are all client-supplied equipment and installation photos, processed into web formats with sizes set so nothing shifts as the page loads.
+Dark, hand-written CSS, no framework. A product rail that runs continuously, a slider for the services, a WhatsApp button that follows you down the page, and the landline sitting in the top bar so calling is always one tap. Every photograph is the client's own equipment and installation work, converted to web formats with dimensions set so the layout doesn't shift while it loads.
 
 ## Stack
 
-Node.js (custom static generator) · HTML · CSS · vanilla JavaScript · JSON-LD · Vercel
+Node.js (custom generator) · HTML · CSS · vanilla JavaScript · JSON-LD · Vercel

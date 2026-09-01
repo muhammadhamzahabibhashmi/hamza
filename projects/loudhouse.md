@@ -1,65 +1,63 @@
 # Loudhouse Marketing
 
 **Repository:** private
-**Role:** full stack — front end, motion, API, SEO, deployment
+**Role:** full stack. Front end, motion, API, search, deploy.
 
 ![Loudhouse home page](../assets/screenshots/loudhouse-home.png)
 
-## What it is
+## The brief
 
-Loudhouse is a marketing agency in Islamabad. They take three clients at a time, give every job a reference number, and don't call a project finished until a number moves. The site had to carry that positioning, which ruled out a template — an agency selling attention can't have a site nobody looks at.
+Loudhouse is a small agency in Islamabad. They keep their client list short on purpose, put a reference number on every job, and won't sign a project off until whatever number they agreed to move has moved.
 
-So the whole thing is built as a sequence of scenes. The home page opens on a Times Square scene with the brand on the billboards, About runs as a scroll-scrubbed film, Services and Work share a 3D speaker that comes apart as you scroll through it, and Cases is a set of numbered jobs presented like a confidential file.
+That positioning ruled out anything template-shaped. An agency whose whole pitch is getting people to look at things can't have a website nobody looks at. So the site is put together as a run of scenes: the landing page opens on Times Square with Loudhouse up on the billboards, About plays as a film you scrub with the scrollbar, Services and Work share a speaker that comes apart as you move down the page, and Cases is laid out like a file someone left on a desk.
 
-Underneath the presentation it's a working MERN app: the contact form validates and stores leads in MongoDB and sends an email, a chatbot answers questions about the agency, and a short quiz recommends which services a visitor actually needs.
+Underneath the presentation it's a working app. The contact form validates, saves to MongoDB and sends mail. An assistant answers questions about the agency. A short quiz works out which services a visitor is actually after.
 
-## Architecture
+## How it's put together
 
-A monorepo with npm workspaces — a Vite/React client and an Express/MongoDB server.
+npm workspaces, with a Vite client and an Express server sharing a repo.
 
-The server runs as a normal Express app locally and as a Vercel serverless function in production, with the client carrying a thin `api/` directory for the deployed routes. Three endpoints: `/api/leads` for the contact form, `/api/chat` for the assistant, `/api/recommend` for the quiz.
+The server runs as a normal Express process in development and as serverless functions in production, so the client carries a thin `api/` folder holding the deployed handlers. Three routes do the work: `/api/leads`, `/api/chat`, `/api/recommend`. Routing on the front is React Router, with a Vercel rewrite sending anything that isn't an asset or an API path back to `index.html`.
 
-Routing is client-side with React Router, with a Vercel rewrite sending everything that isn't an asset or an API call to `index.html`.
+## The About sequence
 
-## The scroll film
+This ate most of the schedule.
 
-The About page is the part I spent the most time on.
+What I wanted was a film you control with the scrollbar. Scroll forward and it advances, scroll back and it rewinds, stop anywhere and it holds on that exact frame. The obvious approach is to set `video.currentTime` and let the browser seek, but browsers don't agree on what that means. Ask for the same timestamp twice and you can get two different pictures, and some engines quietly snap to the nearest keyframe instead of the frame you asked for.
 
-The idea was a cinematic sequence that scrubs off scroll position — scroll down and it plays forward, scroll up and it reverses, stop and it holds on the exact frame. The obvious way to do that is setting `video.currentTime`, but that isn't frame-deterministic across browsers: seek to the same time twice and you can get different frames, and on some engines it lands on the nearest keyframe instead.
+So the video never plays. A build script pulls the 4K master apart into WebP stills with a manifest, and a canvas draws whichever still belongs to the current scroll offset. ScrollTrigger sets a target index, a requestAnimationFrame loop eases toward it rather than jumping, and the real HTML sections fade in on top of the pinned canvas.
 
-Instead, a build script decodes the 4K master into WebP stills with a manifest, and a canvas paints the right still for the current scroll position. GSAP ScrollTrigger drives a target index and a rAF loop eases toward it, so scrubbing stays smooth rather than snapping frame to frame. HTML sections cross-fade over the pinned canvas.
+That was fine on a laptop and hopeless on a phone. Each still was being kept as a decoded `ImageBitmap`, and a decoded bitmap is raw pixels: no compression at all. 181 stills at 1080 by 1920, four bytes a pixel, works out somewhere near 1.5 GB. The tab spent its life allocating and reclaiming instead of drawing. Two changes sorted it, neither of which touched the artwork:
 
-That was fine on desktop and unusable on a phone. Every frame was held as a decoded `ImageBitmap`, which is uncompressed — 181 mobile stills at 1080×1920 works out to roughly 1.5 GB of bitmap on a handset, so the tab spent its time reclaiming memory instead of painting. Two changes fixed it without touching the art:
+- on small screens, use every second still. Over the shorter scrub distance that's still about a frame per 4vh of travel, which nobody notices.
+- decode to the size the canvas is going to paint at, not the size the file happens to be.
 
-- scrub every second still on mobile, which over a shortened scrub distance still works out to about one frame per 4vh of travel
-- decode straight to the size the canvas actually paints at, rather than at full resolution
-
-That took it to roughly 139 MB, about a tenfold cut. Desktop keeps its full frame count and device pixel ratio; the resize only ever downscales, so nothing softens. `prefers-reduced-motion` skips the sequence entirely.
+That landed around 139 MB, call it a tenfold cut. Desktop keeps all 226 frames and its full pixel ratio, because there the resize only ever shrinks something that was about to be shrunk anyway. If the browser reports a preference for reduced motion the sequence doesn't run at all.
 
 ## The speaker
 
-The exploded speaker on Services and Work is a procedural Three.js model rather than a loaded asset — rounded box geometry, standard materials, and a set of named parts registered so they can be driven independently.
+The speaker on Services and Work is generated in code rather than loaded as a model. Rounded box geometry, standard materials, and every part registered by name so it can be moved on its own.
 
-It's built once and reused two ways: on Work it disassembles as you scroll, on Services it rotates on its own as an ambient hero object. Same geometry, different scene, lighting and animation around it. Building it in code rather than shipping a GLB meant no model download and easy control over which part moves when.
+It gets built once and used twice. On Work it disassembles under scroll. On Services it turns slowly on its own as a background object. Same geometry both times, different lighting and different animation wrapped around it. Doing it this way meant no `.glb` to download and no round trip through Blender every time a panel needed to sit somewhere else.
 
-## AI features
+## The two AI routes
 
-Two endpoints, both proxying Groq server-side so the key never reaches the browser.
+Both proxy Groq from the server, so the key stays out of the browser.
 
-The **chatbot** gets a system prompt containing everything it's allowed to know about the agency and is told to answer only from that. Ask it anything off-topic and it declines and steers back. It defaults to one or two sentences and only expands when asked to — the brand voice is blunt, and a chatbot that waffles would undercut it. History is sanitised before it goes anywhere: roles filtered, content truncated, capped at the last ten turns.
+The **assistant** is handed a prompt containing everything it may talk about and instructed to work from that alone. Anything off topic gets a short refusal and a nudge back toward services, process or starting a project. It answers in a sentence or two by default and only goes longer when somebody asks it to, which matters because the brand voice is blunt and a chatbot that rambles would undercut it. Incoming history gets cleaned first: roles filtered, each message clipped, the whole thing capped at ten turns.
 
-The **recommender** runs a short discovery instead. It asks at most four questions, each one building on the previous answers, then returns a service stack. It emits structured JSON rather than prose — either `{done: false, question, options}` so the client can render option chips, or `{done: true, services, primary, name, brief, explanation}` for the final result. The brief has to describe the visitor's actual situation from their answers, not generic filler.
+The **recommender** runs a short interview. Four questions maximum, each one built from what came before, then a suggested stack of services. It replies in JSON rather than prose so the interface can render proper option chips on the way through and a real result at the end, with a written brief that has to describe the visitor's own situation back to them rather than filling space.
 
-## SEO
+## Search
 
-No react-helmet — an SPA this size only needs title, description, canonical, Open Graph and one JSON-LD block kept in sync with the active route, so there's a small hook that upserts them and tags everything it creates so it can clean up on unmount.
+There's no helmet library. A site this size needs a title, a description, a canonical, some Open Graph tags and one block of structured data kept in step with the current route, so there's a small hook that writes those in and marks everything it creates so it can tidy up when the route changes.
 
-Beyond that: a sitemap and robots.txt, permanent redirects for two legacy URLs, and immutable cache headers on the frame directories since those filenames never change.
+Beyond that: sitemap, robots, a couple of permanent redirects for URLs that changed name, and long cache headers on the frame folders since those filenames never change once they're written.
 
-## Testing the motion
+## Checking motion
 
-Motion work is hard to check by eye, so there's a set of Puppeteer scripts under `tools/` that drive the real site: measuring scroll smoothness and frame timing, checking the loader-to-hero handoff doesn't tear, verifying nothing overflows horizontally at any viewport, confirming reduced-motion actually disables the sequences, comparing viewports against each other, and sweeping the console for errors. Most of the mobile performance work came out of what those scripts reported rather than what the page felt like.
+Motion is difficult to judge by looking at it, especially on the machine you built it on. So `tools/` holds a set of Puppeteer scripts that drive the real site and report back: frame timing under scroll, whether the loader hands over to the hero cleanly, whether anything overflows sideways at any width, whether reduced motion genuinely turns the sequences off, how two viewports differ, and what the console says. Most of the mobile work above came out of those numbers rather than out of how the page felt.
 
 ## Stack
 
-React 18 · Vite · React Router · Three.js · React Three Fiber · Drei · GSAP ScrollTrigger · Framer Motion · Anime.js · Lenis · Express · MongoDB · Mongoose · Nodemailer · Groq API · Puppeteer · Vercel
+React 18 · Vite · React Router · Three.js · React Three Fiber · Drei · GSAP ScrollTrigger · Framer Motion · Anime.js · Lenis · Express · MongoDB · Mongoose · Nodemailer · Groq · Puppeteer · Vercel
