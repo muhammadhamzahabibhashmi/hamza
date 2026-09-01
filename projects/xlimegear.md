@@ -4,7 +4,7 @@
 **Repository:** private
 **Role:** UI design, design system, prototype packaging
 
-![XLIME GEAR home page](../assets/screenshots/xlimegear-home.png)
+![XLIME GEAR custom jersey builder](../assets/screenshots/xlimegear-jersey-builder.png)
 
 ## What it is
 
@@ -18,8 +18,6 @@ XLIME GEAR is a custom football kit brand — teams design their own strip, orde
 
 It's a design and front-end prototype rather than a running application. The screens are real HTML with a working design system behind them, built for a client to review and sign off before anything gets wired to a backend.
 
-![Shop all](../assets/screenshots/xlimegear-shop.png)
-
 ## The builder
 
 The jersey builder is what the product actually sells, so it got the most attention.
@@ -28,15 +26,11 @@ It runs as four steps — kit, colours, crest, details — with the progress vis
 
 The step that shapes the rest of the flow is the last one: the primary action is **Review & Quote**, not *Add to cart*. Team kit is priced per job — quantity, print, crest complexity, delivery date all move the number — so the builder ends in a quote request with the unit count carried through. The regular shop side keeps a normal cart and checkout for stock items.
 
-![Custom jersey builder](../assets/screenshots/xlimegear-jersey-builder.png)
-
 ## Design system
 
 Dark, high-contrast, one acid-green accent doing all the signalling. Condensed display type for headings against a neutral sans for body, which gives the storefront a sports-kit feel without needing decoration.
 
 Colours are defined as semantic tokens — surface, surface elevated, surface container, on-surface, primary container, error and so on — extended into the Tailwind config rather than dropped inline. That means the admin screens and the storefront share one palette definition, and a change to the accent moves through all thirteen screens at once.
-
-![Admin order overview](../assets/screenshots/xlimegear-admin.png)
 
 ## Shipping it as one file
 

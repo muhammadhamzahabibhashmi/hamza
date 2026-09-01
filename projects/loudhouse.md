@@ -1,6 +1,5 @@
 # Loudhouse Marketing
 
-**Live:** https://loudhouse-marketing.com
 **Repository:** private
 **Role:** full stack — front end, motion, API, SEO, deployment
 
@@ -13,8 +12,6 @@ Loudhouse is a marketing agency in Islamabad. They take three clients at a time,
 So the whole thing is built as a sequence of scenes. The home page opens on a Times Square scene with the brand on the billboards, About runs as a scroll-scrubbed film, Services and Work share a 3D speaker that comes apart as you scroll through it, and Cases is a set of numbered jobs presented like a confidential file.
 
 Underneath the presentation it's a working MERN app: the contact form validates and stores leads in MongoDB and sends an email, a chatbot answers questions about the agency, and a short quiz recommends which services a visitor actually needs.
-
-![Services page](../assets/screenshots/loudhouse-services.png)
 
 ## Architecture
 
@@ -52,8 +49,6 @@ Two endpoints, both proxying Groq server-side so the key never reaches the brows
 The **chatbot** gets a system prompt containing everything it's allowed to know about the agency and is told to answer only from that. Ask it anything off-topic and it declines and steers back. It defaults to one or two sentences and only expands when asked to — the brand voice is blunt, and a chatbot that waffles would undercut it. History is sanitised before it goes anywhere: roles filtered, content truncated, capped at the last ten turns.
 
 The **recommender** runs a short discovery instead. It asks at most four questions, each one building on the previous answers, then returns a service stack. It emits structured JSON rather than prose — either `{done: false, question, options}` so the client can render option chips, or `{done: true, services, primary, name, brief, explanation}` for the final result. The brief has to describe the visitor's actual situation from their answers, not generic filler.
-
-![Cases page](../assets/screenshots/loudhouse-cases.png)
 
 ## SEO
 

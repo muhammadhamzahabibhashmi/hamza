@@ -14,8 +14,6 @@ There are 44 templates at the moment, sorted by category and by how they move: s
 
 Templates are sold one to one, priced per licence in a conversation, so there's no checkout. Instead visitors build a shortlist in a selection drawer and hand it over to an agent. That decision shapes the whole funnel — the conversion surface is a message, not a payment.
 
-![Template catalogue](../assets/screenshots/formynex-templates.png)
-
 ## The SEO rebuild
 
 The site was originally a plain Vite SPA. Every URL served the same empty `<div id="root">`, and the one canonical tag in `index.html` was hard-coded to a different hostname entirely. So every template page was telling search engines it was a duplicate of a page on another domain.

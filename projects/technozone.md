@@ -12,8 +12,6 @@ Techno Zone has been installing security and communication systems out of Rawalp
 
 Their problem was search. Someone looking for CCTV installation in Islamabad types exactly that, and a single services page listing a dozen things doesn't rank for any of them. So the site is built the other way round: a landing page per service, each one written about that service in that city, with the site's own structure pointing at them.
 
-![CCTV service page](../assets/screenshots/technozone-service.png)
-
 ## Why a generator instead of a framework
 
 The site is mostly content. Twelve service pages plus about, projects, products, areas served, contact and the legal pages — all sharing one header, footer, WhatsApp bar and schema block. Hand-maintaining that means the phone number is wrong on page nine the first time it changes.
