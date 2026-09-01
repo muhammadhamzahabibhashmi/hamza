@@ -102,24 +102,6 @@ The deliverable was the awkward part. The client needed to review all thirteen s
 
 ---
 
-### Also built
-
-Smaller or in-progress projects, all private repositories:
-
-**StudyPath Global** — university discovery and study-abroad platform. Next.js 14, Prisma, PostgreSQL, Tailwind. Country and scholarship pages, a cost calculator, a comparison tool and an admin area.
-
-**Europass CV Maker** — CV builder with drag-and-drop section reordering and PDF export. Next.js, Supabase, `@react-pdf/renderer`, dnd-kit, React Hook Form and Zod.
-
-**Upwork Opportunity Radar** — market-intelligence dashboard that ranks Upwork categories and skills by opportunity quality. Next.js, Drizzle ORM, Neon Postgres, Radix UI, Vitest and Playwright.
-
-**NEXA Studio** — local-first generative media studio for images, video and audio. Next.js front end, Python API and worker, Docker Compose with an optional GPU path so the models run on your own machine.
-
-**Tools & Calculators** — around forty single-purpose tools (GPA, finance, image, JSON, Base64, QR) as static Next.js 15 routes, each one its own indexable page.
-
-**Text Copy Platform** — real-time chat with contacts and push notifications. Express, PostgreSQL, JWT auth, web-push, deployed on Vercel.
-
----
-
 ## Projects
 
 ### [Callup.ai](https://callup.ai)
